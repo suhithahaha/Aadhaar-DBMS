@@ -1,0 +1,11 @@
+create trigger tr_insert
+before insert on aadhar_card
+for each row
+set new.name=upper(new.name);
+
+
+create trigger tr_update
+before update on aadhar_card
+for each row
+set new.name=upper(new.name);
+

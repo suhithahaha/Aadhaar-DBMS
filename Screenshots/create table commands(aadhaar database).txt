@@ -1,0 +1,54 @@
+create table citizen(
+	poi_no bigint primary key,
+	name varchar(50) not null,
+	address varchar(150) not null);
+
+create table operator(
+	emp_id bigint primary key,
+	emp_name varchar(50) not null,
+	poi_no bigint,
+	centre_id bigint,
+	foreign key(centre_id) references enrollment_centre(centre_id) on delete cascade on update cascade,
+	foreign key(poi_no) references citizen(poi_no) on delete cascade on update cascade);
+
+create table enrollment_centre(
+	centre_id bigint primary key,
+	centre_name varchar(100) not null,
+	centre_address varchar(150) not null,
+	type varchar(20));
+
+create table family(
+	por_id bigint,
+	poi_no bigint,
+	relation varchar(10) not null,
+	uid_of_member bigint not null,
+	primary key(por_id,poi_no),
+	foreign key(poi_no) references citizen(poi_no) on delete cascade on update cascade);
+	
+create table enrolls(
+	poi_no bigint,
+	centre_id bigint,
+	primary key(poi_no,centre_id),
+	foreign key(poi_no) references citizen(poi_no) on delete cascade on update cascade,
+	foreign key(centre_id) references enrollment_centre(centre_id) on delete cascade on update cascade);
+
+create table aadhar_card(
+	uid bigint primary key,
+	name varchar(50) not null,
+	dob date not null,
+	address varchar(150) not null,
+	gender varchar(40) not null,
+	email varchar(50) not null,
+	phno bigint not null,
+	biometric_data varchar(30) not null,
+	poi_no bigint,
+	centre_id bigint,
+	foreign key(poi_no) references citizen(poi_no) on delete cascade on update cascade,
+	foreign key(centre_id) references enrollment_centre(centre_id) on delete cascade on update cascade);
+	
+	
+	
+
+ 
+	
+
